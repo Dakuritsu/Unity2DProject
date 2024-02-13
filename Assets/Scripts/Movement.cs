@@ -9,6 +9,13 @@ public class Movement : MonoBehaviour
     public float speed;
     public Animator animator;
     private Vector3 direction; // car sinon on peut pas l'utiliser dans FixedUpdate()
+    private Endurance endurance;  
+
+
+    private void Start()
+    {
+        endurance = GetComponent<Endurance>();
+    }
 
     private void Update(){
         float horizontal = Input.GetAxisRaw("Horizontal"); // Q D -> <-
@@ -18,11 +25,19 @@ public class Movement : MonoBehaviour
 
         AnimateMovement(direction);
 
+        Debug.Log("quantité d'endurance :" + endurance.currentEndurance + "\n");
+        Debug.Log("vitesse actuelle : " + speed);
+
 
     }
 
     private void FixedUpdate(){
-        transform.position += direction * speed * Time.deltaTime;
+        transform.position += direction * GetSpeed() * Time.deltaTime;
+    }
+
+    private float GetSpeed()
+    {
+        return Input.GetKey(KeyCode.LeftShift) && endurance.currentEndurance > 0 ? speed * 2f : speed;
     }
 
     private void AnimateMovement(Vector3 direction){
