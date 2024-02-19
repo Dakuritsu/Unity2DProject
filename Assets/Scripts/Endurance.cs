@@ -2,10 +2,23 @@ using UnityEngine;
 
 public class Endurance : MonoBehaviour
 {
-    public float maxEndurance = 100f;
-    public float currentEndurance;
-    public float enduranceConsumptionRate = 10f;
-    public float enduranceRecoveryRate = 20f; 
+    private float maxEndurance = 100f;
+    private float currentEndurance;
+
+    [SerializeField] private float enduranceConsumptionRate = 10f;
+    [SerializeField] private float enduranceRecoveryRate = 20f; 
+
+
+    public float GetCurrentEndurance
+    {
+        get { return currentEndurance; }
+    }
+
+    public float GetMaxEndurance
+    {
+        get { return maxEndurance; }
+    }
+
 
     private void Start()
     {
@@ -16,18 +29,27 @@ public class Endurance : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            ConsumeEndurance();
+            ConsumeEndurance(enduranceConsumptionRate);
         }
         else if (currentEndurance < maxEndurance)
         {
             currentEndurance += enduranceRecoveryRate * Time.deltaTime;
             currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);//pour que currentEndurance reste entre 0 et maxEndurance
         }
+        Debug.Log("quantité d'endurance :" + currentEndurance + "\n");
     }
     
-    private void ConsumeEndurance()
+    internal void ConsumeEndurance(float amount)
     {
-        currentEndurance -= enduranceConsumptionRate * Time.deltaTime;
+        currentEndurance -= amount * Time.deltaTime;
         currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);
+        Debug.Log("quantité d'endurance :" + currentEndurance + " consommation : " + amount + "\n");
+    }
+
+        internal void ConsumeEnduranceForDash(float amount)
+    {
+        currentEndurance -= amount;
+        currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);
+        Debug.Log("quantité d'endurance :" + currentEndurance + " consommation : " + amount + "\n");
     }
 }
