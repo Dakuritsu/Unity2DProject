@@ -12767,6 +12767,7 @@ GameObject:
   - component: {fileID: 821449267}
   - component: {fileID: 821449268}
   - component: {fileID: 821449271}
+  - component: {fileID: 821449273}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -12902,10 +12903,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53bb8efeba5c563498ee91789ee04ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashingCost: 30
   dashingPower: 28
   dashingTime: 0.2
-  rb: {fileID: 821449268}
+  dashTimer: 0
   tr: {fileID: 821449271}
+  DashCompleted:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!96 &821449271
 TrailRenderer:
   serializedVersion: 3
@@ -13033,6 +13038,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventory:
     slots: []
+--- !u!114 &821449273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821449264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a2d10e6ca967164fbc957c3542a0293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &847579446
 PrefabInstance:
   m_ObjectHideFlags: 0
