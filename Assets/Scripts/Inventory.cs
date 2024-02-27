@@ -16,7 +16,7 @@ public class Inventory
         {
             type = CollectableType.NONE;
             count = 0;
-            maxAllowed = 60;
+            // maxAllowed = 60;
         }
 
         public bool CanAddItem()    // vérifie si il y a encore de la place
@@ -33,6 +33,7 @@ public class Inventory
         {
             this.type = item.type;
             this.icon = item.icon;
+            this.maxAllowed = item.maxAllowed;
             count++;
         }
         
