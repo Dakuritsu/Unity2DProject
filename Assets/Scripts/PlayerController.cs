@@ -4,15 +4,13 @@ using UnityEngine;
 [RequireComponent(typeof(Endurance))]
 [RequireComponent(typeof(Dash))]
 
-
 public class PlayerController : MonoBehaviour
 {
     private Movement movement;
     private Endurance endurance;
     private Dash dash;
 
-    private int states = 0; // 0 -> Walk Sprint
-                            // 1 -> Dash
+    private int states = 0;
 
     private void Start()
     {
@@ -42,7 +40,6 @@ public class PlayerController : MonoBehaviour
         //Si on veux Dash
         if(Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("L'état actuel est : " + states);
             if(dash.TryDash())
             {
                 movement.SetDirection(new Vector3(0, 0, 0));
@@ -59,4 +56,5 @@ public class PlayerController : MonoBehaviour
     {
         states = state;
     }
+
 }
