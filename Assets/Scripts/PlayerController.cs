@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
             Debug.Log("L'état actuel est : " + states);
             if(dash.TryDash())
             {
-                states = 1;
                 movement.SetDirection(new Vector3(0, 0, 0));
             }
         }
