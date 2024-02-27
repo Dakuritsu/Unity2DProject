@@ -14,12 +14,21 @@ public class Endurance : MonoBehaviour
         get { return currentEndurance; }
     }
 
+    public float GetEnduranceConsumptionRate
+    {
+        get { return enduranceConsumptionRate; }
+    }
+
     public float GetMaxEndurance
     {
         get { return maxEndurance; }
     }
 
 
+    public void SetCurrentEndurance(float amount)
+    {
+        currentEndurance = amount;
+    }
     private void Start()
     {
         currentEndurance = maxEndurance;
@@ -27,29 +36,24 @@ public class Endurance : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            ConsumeEndurance(enduranceConsumptionRate);
-        }
-        else if (currentEndurance < maxEndurance)
-        {
-            currentEndurance += enduranceRecoveryRate * Time.deltaTime;
-            currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);//pour que currentEndurance reste entre 0 et maxEndurance
-        }
-        Debug.Log("quantité d'endurance :" + currentEndurance + "\n");
     }
     
-    internal void ConsumeEndurance(float amount)
+    internal void ConsumeEndurance()
     {
-        currentEndurance -= amount * Time.deltaTime;
+        currentEndurance -= enduranceConsumptionRate * Time.deltaTime;
         currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);
-        Debug.Log("quantité d'endurance :" + currentEndurance + " consommation : " + amount + "\n");
+        Debug.Log("quantité d'endurance :" + currentEndurance + " consommation : " + enduranceConsumptionRate + "\n");
     }
 
-        internal void ConsumeEnduranceForDash(float amount)
+    internal void ConsumeEnduranceForDash(float amount)
     {
         currentEndurance -= amount;
         currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);
         Debug.Log("quantité d'endurance :" + currentEndurance + " consommation : " + amount + "\n");
+    }
+
+    public void recoveryEndurance(){
+        currentEndurance += enduranceRecoveryRate * Time.deltaTime;
+        currentEndurance = Mathf.Clamp(currentEndurance, 0f, maxEndurance);
     }
 }
