@@ -1,47 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Endurance))]
 public class Movement : MonoBehaviour
 {
-    private Vector3 direction; // car sinon on peut pas l'utiliser dans FixedUpdate()
+    private Rigidbody2D rb;
     private Endurance endurance;
-
+    private Vector3 direction;
+    
     [SerializeField] private float speed;
     [SerializeField] private Animator animator;
 
-
-    private void Start()
+    public Animator GetAnimator
     {
-        endurance = GetComponent<Endurance>();
+        get { return animator; }
     }
 
-    private void Update(){
-        float horizontal = Input.GetAxisRaw("Horizontal"); // Q D -> <-
-        float vertical = Input.GetAxisRaw("Vertical"); // Z S flèche du haut flèche du bas
-
-        direction = new Vector3(horizontal, vertical, 0);
-
-        AnimateMovement(direction);
-    }
-
-    //LateUpdate appelé avant que les collisions ne soient calculées donc on choisit FixedUpdate()
-    private void FixedUpdate(){
-        transform.position += direction.normalized * GetSpeed() * Time.deltaTime;
-    }
-
-    private float GetSpeed()
+    public void SetDirection(Vector3 newDirection)
     {
-        return Input.GetKey(KeyCode.LeftShift) && endurance.GetCurrentEndurance > 0 ? speed * 2f : speed;
-    }
-
-    private void AnimateMovement(Vector3 direction){
-        if(animator != null)
+        direction = newDirection;
+        if (animator != null)
         {
-            if(direction.magnitude > 0)// Pour savoir si le personnage se déplace
+            if (direction.magnitude > 0.5) // Pour savoir si le personnage se déplace
             {
+                rb.velocity = direction * speed;
                 animator.SetBool("isMoving", true);
 
                 animator.SetFloat("horizontal", direction.x);
@@ -49,9 +31,42 @@ public class Movement : MonoBehaviour
             }
             else
             {
+                rb.velocity = Vector3.zero;
                 animator.SetBool("isMoving", false);
             }
         }
-
     }
+
+
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        endurance = GetComponent<Endurance>();
+    }
+
+    private void Update()
+    {
+        
+    }
+
+
+    private float GetSpeed()
+    {
+        return endurance.GetCurrentEndurance >= endurance.GetEnduranceConsumptionRate ? (speed * 2f) : speed;
+    }
+
+
+
+    public void TrySprint()
+    {
+        if (direction.magnitude > 0)
+        {
+            if(endurance.GetCurrentEndurance >= endurance.GetEnduranceConsumptionRate)
+            {
+                rb.velocity = direction.normalized * (speed * 2f);
+                endurance.ConsumeEndurance();  
+            }
+        }      
+    }
+
 }
