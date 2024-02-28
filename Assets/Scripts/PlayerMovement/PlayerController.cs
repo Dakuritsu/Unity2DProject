@@ -40,9 +40,12 @@ public class PlayerController : MonoBehaviour
         //Si on veux Dash
         if(Input.GetKeyDown(KeyCode.E))
         {
+            
             if(dash.TryDash())
             {
+                states = 1;
                 movement.SetDirection(new Vector3(0, 0, 0));
+
             }
         }
         
