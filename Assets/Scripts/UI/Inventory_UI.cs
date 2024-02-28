@@ -7,6 +7,7 @@ public class Inventory_UI : MonoBehaviour
     public GameObject inventoryPanel;
     public Player player;
     public List<Slot_UI> slots = new List<Slot_UI>();
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
