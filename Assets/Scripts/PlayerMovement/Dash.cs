@@ -5,6 +5,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Dash : MonoBehaviour
 {
+    private Collider2D playerCollider;
     private bool canDash = true;
     private bool isDashing;
     private Vector2 dashingDir;
@@ -24,6 +25,7 @@ public class Dash : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         endurance = GetComponent<Endurance>();
+        playerCollider = GetComponent<Collider2D>();
     }
 
 
@@ -54,6 +56,29 @@ public class Dash : MonoBehaviour
     {
         if (canDash && endurance.GetCurrentEndurance >= dashingCost)
         {
+            Vector2 finalPosition = (Vector2)transform.position + rb.velocity.normalized * dashingPower * dashingTime;
+            //OverlapBoxAll => liste de tous les colliders qui se trouvent à l'intérieur d'une zone définie.
+            /*
+                finalPosition -> la position de la zone 
+                playerCollider.bounds.size -> sa taille
+
+            */
+            Collider2D[] colliders = Physics2D.OverlapBoxAll(finalPosition, playerCollider.bounds.size, 0f);
+            bool collided = false;
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider != playerCollider)
+                {
+                    collided = true;
+                    break;
+                }
+            }
+
+            if (!collided)
+            {
+                playerCollider.enabled = false;
+            }
+
             endurance.ConsumeEnduranceForDash(dashingCost);
             isDashing = true;
             canDash = false;
@@ -66,8 +91,11 @@ public class Dash : MonoBehaviour
         return false;
     }
 
+
     private void StopDashing()
     {
+        playerCollider.enabled = true;
+
         rb.velocity = Vector2.zero;
         tr.emitting = false;
         isDashing = false;

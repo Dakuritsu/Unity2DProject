@@ -12904,7 +12904,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashingCost: 30
-  dashingPower: 28
+  dashingPower: 36
   dashingTime: 0.2
   dashTimer: 0
   tr: {fileID: 821449271}
