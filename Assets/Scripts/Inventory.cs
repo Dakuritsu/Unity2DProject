@@ -8,16 +8,38 @@ public class Inventory
     [System.Serializable]
     public class Slot   
     {
-        public CollectableType type;
-        public int count;
-        public int maxAllowed;
-        public Sprite icon;
-        public Slot()   // Constructeur Slot 
+        [SerializeField] private CollectableType type;
+        [SerializeField] private int count;
+        [SerializeField] private int maxAllowed;
+        [SerializeField] private Sprite icon;
+
+        
+        public Slot()  // Constructeur Slot 
         {
             type = CollectableType.NONE;
             count = 0;
-            // maxAllowed = 60;
         }
+
+
+        //------------------------------------------------
+        public CollectableType GetTypeSlot
+        {
+            get { return type; }
+        }
+        public int GetCount
+        {
+            get { return count; }
+        }
+        public int GetMaxAllowed
+        {
+            get { return maxAllowed; }
+        }
+        public Sprite GetIcon
+        {
+            get { return icon; }
+        }
+
+        //=====================================================
 
         public bool CanAddItem()    // vérifie si il y a encore de la place
         {
@@ -31,13 +53,15 @@ public class Inventory
 
         public void AddItem(Collectable item) //modifie le type et l'icon du slot
         {
-            this.type = item.type;
-            this.icon = item.icon;
-            this.maxAllowed = item.maxAllowed;
+            this.type = item.GetTypeCollectable;
+            this.icon = item.GetIcon;
+            this.maxAllowed = item.GetMaxAllowed;
             count++;
         }
         
     }
+
+    //========= Suite de la classe Inventory ==================
 
     public List<Slot> slots = new List<Slot>();
 
@@ -54,7 +78,7 @@ public class Inventory
     {
         foreach(Slot slot in slots)
         {
-            if(slot.type  == item.type && slot.CanAddItem())
+            if(slot.GetTypeSlot  == item.GetTypeCollectable && slot.CanAddItem())
             {
                 slot.AddItem(item);
                 return;
@@ -63,7 +87,7 @@ public class Inventory
 
         foreach(Slot slot in slots)
         {
-            if(slot.type == CollectableType.NONE)
+            if(slot.GetTypeSlot == CollectableType.NONE)
             {
                 slot.AddItem(item);
                 return;

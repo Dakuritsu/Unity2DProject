@@ -7,6 +7,7 @@ public class Inventory_UI : MonoBehaviour
     public GameObject inventoryPanel;
     public Player player;
     public List<Slot_UI> slots = new List<Slot_UI>();
+    
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
@@ -34,7 +35,7 @@ public class Inventory_UI : MonoBehaviour
         {
             for (int i=0; i < slots.Count; i++)
             {
-                if(player.inventory.slots[i].type != CollectableType.NONE)
+                if(player.inventory.slots[i].GetTypeSlot != CollectableType.NONE)
                 {
                     slots[i].SetItem(player.inventory.slots[i]);
                 }

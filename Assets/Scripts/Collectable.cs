@@ -4,9 +4,26 @@ using UnityEngine;
 
 public class Collectable : MonoBehaviour
 {
-    public CollectableType type;
-    public Sprite icon;
-    public int maxAllowed;
+    [SerializeField] private CollectableType type;
+    [SerializeField] private Sprite icon;
+    [SerializeField] private int maxAllowed;
+
+//-------------------------------------------------------------------
+    public CollectableType GetTypeCollectable
+    {
+        get { return type; }
+    }
+    public Sprite GetIcon
+    {
+        get { return icon; }
+    }
+    public int GetMaxAllowed
+    {
+        get { return maxAllowed; }
+    }
+
+//================================================================
+
     private void OnTriggerEnter2D(Collider2D collision){
         Player player = collision.GetComponent<Player>();
 
@@ -17,6 +34,7 @@ public class Collectable : MonoBehaviour
         }
     }
 }
+
 
 public enum CollectableType // enum avec les différent types 
 {

@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   icon: {fileID: 1318549178, guid: 523fb5950c7c90f4ebb6a84196178d5a, type: 3}
+  maxAllowed: 30
 --- !u!61 &1125531041048381610
 BoxCollider2D:
   m_ObjectHideFlags: 0
