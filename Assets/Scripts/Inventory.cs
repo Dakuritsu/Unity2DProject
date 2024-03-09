@@ -21,7 +21,7 @@ public class Inventory
         }
 
 
-        //------------------------------------------------
+        //---------------- GET ------------------
         public CollectableType GetTypeSlot
         {
             get { return type; }
@@ -58,6 +58,20 @@ public class Inventory
             this.maxAllowed = item.GetMaxAllowed;
             count++;
         }
+
+        public void RemoveItem()
+        {
+            if(count > 0)
+            {
+                count--;
+
+                if(count == 0)
+                {
+                    icon = null;
+                    type = CollectableType.NONE;
+                }
+            }
+        }
         
     }
 
@@ -93,5 +107,10 @@ public class Inventory
                 return;
             }
         }
+    }
+
+    public void Remove(int index)
+    {
+        slots[index].RemoveItem();
     }
 }

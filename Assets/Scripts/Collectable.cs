@@ -8,6 +8,12 @@ public class Collectable : MonoBehaviour
     [SerializeField] private Sprite icon;
     [SerializeField] private int maxAllowed;
 
+    public Rigidbody2D rb2d;
+
+    private void Awake()
+    {
+        rb2d = GetComponent<Rigidbody2D>();    
+    }
 //-------------------------------------------------------------------
     public CollectableType GetTypeCollectable
     {
