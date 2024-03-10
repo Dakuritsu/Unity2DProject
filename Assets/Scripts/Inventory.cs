@@ -14,7 +14,7 @@ public class Inventory
         [SerializeField] private Sprite icon;
 
         
-        public Slot()  // Constructeur Slot 
+        public Slot()   // Constructeur Slot 
         {
             type = CollectableType.NONE;
             count = 0;
@@ -41,7 +41,7 @@ public class Inventory
 
         //=====================================================
 
-        public bool CanAddItem()    // vérifie si il y a encore de la place
+        public bool CanAddItem()    // Vérifie si il y a encore de la place
         {
             if(count < maxAllowed)
             {
@@ -51,7 +51,7 @@ public class Inventory
             return false;
         }
 
-        public void AddItem(Collectable item) //modifie le type et l'icon du slot
+        public void AddItem(Collectable item)   // Modifie le type et l'icon du slot
         {
             this.type = item.GetTypeCollectable;
             this.icon = item.GetIcon;
@@ -59,7 +59,7 @@ public class Inventory
             count++;
         }
 
-        public void RemoveItem()
+        public void RemoveItem()    // Retire 1 à la quantité du slot
         {
             if(count > 0)
             {
@@ -88,7 +88,7 @@ public class Inventory
         }
     } 
 
-    public void Add(Collectable item)// ajoute le collectable si on peut
+    public void Add(Collectable item)   // Ajoute le collectable si on peut
     {
         foreach(Slot slot in slots)
         {
@@ -109,7 +109,7 @@ public class Inventory
         }
     }
 
-    public void Remove(int index)
+    public void Remove(int index)   // Appelle RemoveItem sur un index choisi
     {
         slots[index].RemoveItem();
     }

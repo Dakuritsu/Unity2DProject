@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
     {
         rb2d = GetComponent<Rigidbody2D>();    
     }
-//-------------------------------------------------------------------
+//------------------------ GET --------------------------------
     public CollectableType GetTypeCollectable
     {
         get { return type; }

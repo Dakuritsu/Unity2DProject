@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Pour gérer les états du jeux et les informations importantes
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;

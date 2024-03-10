@@ -16,7 +16,7 @@ public class Inventory_UI : MonoBehaviour
         }
     }
 
-    public void ToggleInventory()
+    public void ToggleInventory()   // Pour afficher l'inventaire
     {
         if(!inventoryPanel.activeSelf)
         {
