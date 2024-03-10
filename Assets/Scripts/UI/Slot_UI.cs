@@ -6,6 +6,7 @@ using TMPro;
 
 public class Slot_UI : MonoBehaviour
 {
+    [SerializeField] private GameObject highlight;
     public Image itemIcon;
     public TextMeshProUGUI quantityText;
 
@@ -24,5 +25,10 @@ public class Slot_UI : MonoBehaviour
         itemIcon.sprite = null;
         itemIcon.color = new Color(1,1,1,0);
         quantityText.text = "";
+    }
+
+    public void SetHighLight(bool isOn)
+    {
+        highlight.SetActive(isOn);
     }
 }
