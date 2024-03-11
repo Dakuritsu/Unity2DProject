@@ -1,11 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Health playerHealth; 
+    public Health playerHealth;
 
     private Image healthBarImage;
 
@@ -19,8 +18,8 @@ public class HealthBar : MonoBehaviour
         if (playerHealth != null)
         {
             //met à jour la taille de la barre de vie en fonction de la santé actuelle du joueur
-            //float fillAmount = playerHealth.GetCurrentHealth / playerHealth.GetMaxHealth;
-            //healthBarImage.fillAmount = fillAmount;
+            float fillAmount = playerHealth.GetCurrentHealth() / playerHealth.GetMaxHealth();
+            healthBarImage.fillAmount = fillAmount;
         }
     }
 }

@@ -30,4 +30,19 @@ public class Health : MonoBehaviour
         Debug.Log("Player died.");
         //gameObject.SetActive(false);
     }
+
+    public float GetCurrentHealth()
+    {
+        
+        return this.currentHealth;
+    }
+
+
+    public float GetMaxHealth()
+    {
+        return this.maxHealth;
+    }
+
+
+
 }
