@@ -28,5 +28,12 @@ public class Player : MonoBehaviour
         
         dropppedItem.rb2d.AddForce(spawnOffset * 2f , ForceMode2D.Impulse);//ForceMode2D.Impulse pour que la force ne s'applique pas au fil du temps
     }
-    
+
+    public void DropItem(Collectable item , int numToDrop)
+    {
+        for(int i=0 ; i < numToDrop ; i++)
+        {
+            DropItem(item);
+        }
+    }
 }

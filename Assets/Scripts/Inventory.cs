@@ -113,4 +113,15 @@ public class Inventory
     {
         slots[index].RemoveItem();
     }
+
+    public void Remove(int index , int numToRemove)   // Appelle RemoveItem sur un index choisi
+    {
+        if(slots[index].GetCount >= numToRemove)
+        {
+            for(int i=0 ; i < numToRemove ; i++)
+            {
+                Remove(index);
+            }
+        }
+    }
 }
