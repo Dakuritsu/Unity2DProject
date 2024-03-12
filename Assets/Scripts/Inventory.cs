@@ -41,9 +41,20 @@ public class Inventory
 
         //=====================================================
 
-        public bool CanAddItem()    // Vérifie si il y a encore de la place
+        public bool IsEmpty
         {
-            if(count < maxAllowed)
+            get
+            {
+                if(type == CollectableType.NONE && count == 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+        }
+        public bool CanAddItem(CollectableType collectableType)    // Vérifie si il y a encore de la place
+        {
+            if(this.type == collectableType && count < maxAllowed)
             {
                 return true;
             }
@@ -56,6 +67,14 @@ public class Inventory
             this.type = item.GetTypeCollectable;
             this.icon = item.GetIcon;
             this.maxAllowed = item.GetMaxAllowed;
+            count++;
+        }
+
+        public void AddItem(CollectableType collectableType , Sprite icon, int maxAllowed) 
+        {
+            this.type = collectableType;
+            this.icon = icon;
+            this.maxAllowed = maxAllowed;
             count++;
         }
 
@@ -92,7 +111,7 @@ public class Inventory
     {
         foreach(Slot slot in slots)
         {
-            if(slot.GetTypeSlot  == item.GetTypeCollectable && slot.CanAddItem())
+            if(slot.GetTypeSlot  == item.GetTypeCollectable && slot.CanAddItem(item.GetTypeCollectable))
             {
                 slot.AddItem(item);
                 return;
@@ -121,6 +140,21 @@ public class Inventory
             for(int i=0 ; i < numToRemove ; i++)
             {
                 Remove(index);
+            }
+        }
+    }
+
+    public void MoveSlot(int fromIndex , int toIndex , Inventory toInventory , int numToMove = 1)
+    {
+        Slot fromSlot = slots[fromIndex];
+        Slot toSlot = toInventory.slots[toIndex];
+
+        if(toSlot.IsEmpty || toSlot.CanAddItem(fromSlot.GetTypeSlot))
+        {
+            for(int i=0 ; i < numToMove ; i++)
+            {
+                toSlot.AddItem(fromSlot.GetTypeSlot , fromSlot.GetIcon , fromSlot.GetMaxAllowed);
+                fromSlot.RemoveItem();
             }
         }
     }

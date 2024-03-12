@@ -7,11 +7,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {   
     private PlayerController playerController;
-    public Inventory inventory;
+    public InventoryManager inventory;
 
     private void Awake()
     {
-        inventory = new Inventory(21);
+        inventory = GetComponent<InventoryManager>();
     }
 
     private void Start()
