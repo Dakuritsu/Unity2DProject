@@ -9,12 +9,12 @@ public enum PortalState
 }
 public class HousePortal : MonoBehaviour
 {
-    public int SceneIndex;
-    public Sprite OpenPortal;
-    public Sprite ClosedPortal;
-    public Sprite OnCooldownPortal;
+    [SerializeField] private int SceneIndex;
+    [SerializeField] private Sprite OpenPortal;
+    [SerializeField] private Sprite ClosedPortal;
+    [SerializeField] private Sprite OnCooldownPortal;
     private bool Active;
-    private float CooldownTime;
+    [SerializeField] private float CooldownTime;
 
 
     private void Awake()
