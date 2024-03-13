@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerController))]
 
@@ -17,6 +18,14 @@ public class Player : MonoBehaviour
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape)) 
+        {
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
     }
 
     public void DropItem(Collectable item)
