@@ -20,7 +20,6 @@ public class HousePortal : MonoBehaviour
     private void Awake()
     { 
         Active = false;
-        CooldownTime = 5.0f;
     }
     private void Start()
     {
@@ -112,31 +111,31 @@ public class HousePortal : MonoBehaviour
 
    private void LoadInteriorSceneAndTransferPlayer()
     {   
-        // Charger la scène concernée 
+        // Charger la scÃ¨ne concernÃ©e 
         SceneManager.LoadScene(SceneIndex, LoadSceneMode.Single);
-        // Récupérer une référence au joueur
+        // RÃ©cupÃ©rer une rÃ©fÃ©rence au joueur
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         if (player != null)
-        {   // Si le joueur existe dans la nouvelle scène, on précise juste sa position
+        {   // Si le joueur existe dans la nouvelle scÃ¨ne, on prÃ©cise juste sa position
             player.transform.position = new Vector3(-4f, -2f);
         }
         else
-        {   // Sinon on récupére une référence au joueur dans la scène d'origine
+        {   // Sinon on rÃ©cupÃ©re une rÃ©fÃ©rence au joueur dans la scÃ¨ne d'origine
             GameObject playerInPreviousScene = GameObject.FindGameObjectWithTag("Player");
 
             if (playerInPreviousScene != null)
             {
-                // Instancier le joueur dans la nouvelle scène
+                // Instancier le joueur dans la nouvelle scÃ¨ne
                 player = Instantiate(playerInPreviousScene);
 
-                //On déplace le joueur dans la nouvelle scène 
+                //On dÃ©place le joueur dans la nouvelle scÃ¨ne 
                 SceneManager.MoveGameObjectToScene(player, SceneManager.GetSceneByBuildIndex(SceneIndex));
 
-                // On Définit la nouvelle position du joueur 
+                // On DÃ©finit la nouvelle position du joueur 
                 player.transform.position = new Vector3(-4f, -2f);
 
-                // On évite que le joueur ne soit détruit lorsque la svène est changée 
+                // On Ã©vite que le joueur ne soit dÃ©truit lorsque la svÃ¨ne est changÃ©e 
                 DontDestroyOnLoad(player);
             }
             else
